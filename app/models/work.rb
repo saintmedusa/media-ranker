@@ -14,7 +14,7 @@ class Work < ApplicationRecord
     if !@categories.include? work_category
       raise ArgumentError.new("not a valid category")
     end
-    return Work.where(category: work_category)
+    return Work.where(category: work_category).to_a
   end
 
 end
