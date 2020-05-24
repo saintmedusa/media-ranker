@@ -1,6 +1,9 @@
 class WorksController < ApplicationController
   def index
-    @works = Work.all
+    @works = Work.all #{}
+    # @works[:albums] = Work.retrieve_category("album")
+    # @works[:books] = Work.retrieve_category("book")
+    # @works[:movie] = Work.retrieve_category("movie")
   end
 
   def show
@@ -14,7 +17,7 @@ class WorksController < ApplicationController
   def create
     @work = Work.new(work_params)
     if @work.save
-      redirect_to work_path
+      redirect_to work_path(@work)
       return
     else
       render :new
