@@ -1,9 +1,9 @@
 class WorksController < ApplicationController
   def index
-    @works = Work.all #{}
-    # @works[:albums] = Work.retrieve_category("album")
-    # @works[:books] = Work.retrieve_category("book")
-    # @works[:movie] = Work.retrieve_category("movie")
+    @works = {}
+    Work.categories.each do |category|
+      @works[category] = Work.retrieve_category(category)
+    end
   end
 
   def show
