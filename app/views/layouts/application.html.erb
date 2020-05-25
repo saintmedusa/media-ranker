@@ -8,8 +8,23 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  
   <body>
-    <%= yield %>
+    <header>
+    <h1> Media Ranker 
+    <br><span class="by-line">Ranking the Best of Everything</span>
+    </h1>
+    </header>
+    <nav>
+    <div class="nav-option"><%= link_to "All Works", works_path, class: "nav-link"%></div>
+    <div class="nav-option"><%= link_to "Add a New Work", new_work_path, class: "nav-link"%></div>
+    </nav>
+    <main><%= yield %></main>
+    <footer>
+      <p>Created by: <a href="https://github.com/saintmedusa" class="link">Yaz O'Shaughnessy</a></p>
+    </footer>
   </body>
+
+
 </html>
+
