@@ -2,17 +2,35 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
-// index
+
+
+// index + top
+.top-works {
+  display: flex;
+}
+
 table {
   width: 100%;
   padding: 2px;
   border-top: 1px solid grey;
 }
 
-tr {
+tr.all {
   border-bottom: 1px solid grey;
+}
+
+tr.top {
+  font-size: 120%;
 }
 
 .table-headers {
   border-bottom: 2px solid grey;
+}
+
+div.all {
+  text-align: left;
+}
+
+div.top {
+  margin: 5px;
 }

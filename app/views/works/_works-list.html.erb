@@ -1,0 +1,29 @@
+
+<% @works.keys.each do |category|%>
+  <div class=<%=works_class%>>
+  <h3><%="#{table_name} #{category.capitalize}s"%></h3>
+  <table>
+    <%if headers%>
+      <tr class="table-headers">
+        <th>Title</th>
+        <th>Creator</th> 
+        <th>Published</th>
+        <th><%#votes%></th>
+      </tr>
+    <%end%>
+    <% @works[category].each do |work|%>
+      <tr class=<%=works_class%>>
+        <td><%#votes%> </td>
+        <td><%=link_to work.title, work_path(work), class: "link"%></td>
+        <td class=<%works_class%>>
+          <%=work.creator%>
+        </td>
+        <%if all_info%>
+          <td><%=work.published%></td>
+        <%end%>
+      </tr>
+    <%end%>
+  </table>
+  </div>
+  <br>
+<%end%>
