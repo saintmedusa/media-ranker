@@ -1,11 +1,11 @@
 class WorksController < ApplicationController
+  before_action :find_work, only: [:show, :edit, :update, :destroy]
+
   def index
     @works = Work.category_hash
   end
 
-  def show
-    @work = Work.find_by(id: params[:id])
-  end
+  def show; end
 
   def new
     @work = Work.new
@@ -23,8 +23,6 @@ class WorksController < ApplicationController
   end
 
   def edit
-    @work = Work.find_by(id: params[:id])
-
     if @work.nil?
       head :not_found
       return
@@ -32,7 +30,6 @@ class WorksController < ApplicationController
   end
 
   def update
-    @work = Work.find_by(id: params[:id])
     if @work.nil?
       head :not_found
       return
@@ -46,7 +43,6 @@ class WorksController < ApplicationController
   end
 
   def destroy
-    @work = Work.find_by(id: params[:id])
     if @work.nil?
       head :not_found
       return
@@ -66,5 +62,9 @@ class WorksController < ApplicationController
   private
   def work_params
     return params.require(:work).permit(:title, :category, :creator, :published, :description)
+  end
+
+  def find_work
+    @work = Work.find_by(id: params[:id])
   end
 end
