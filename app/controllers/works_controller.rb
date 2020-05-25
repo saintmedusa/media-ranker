@@ -1,9 +1,6 @@
 class WorksController < ApplicationController
   def index
-    @works = {}
-    Work.categories.each do |category|
-      @works[category] = Work.retrieve_category(category)
-    end
+    @works = Work.category_hash
   end
 
   def show
@@ -59,6 +56,14 @@ class WorksController < ApplicationController
     return
   end
 
+  def top_10
+    @works = {}
+    Work.category_hash.each do |category, works|
+      @works[category] = Work.top_10(works)
+    end
+  end
+
+  private
   def work_params
     return params.require(:work).permit(:title, :category, :creator, :published, :description)
   end

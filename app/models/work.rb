@@ -6,6 +6,7 @@ class Work < ApplicationRecord
   validates :published, presence: true
     #numericality: {only_integer: true, less_than_or_equal_to: Time.now.year}
 
+  
   def self.categories
     return @categories
   end
@@ -15,6 +16,18 @@ class Work < ApplicationRecord
       raise ArgumentError.new("not a valid category")
     end
     return Work.where(category: work_category).to_a
+  end
+
+  def self.category_hash
+    works = {}
+    Work.categories.each do |category|
+      works[category] = Work.retrieve_category(category)
+    end
+    return works
+  end
+
+  def self.top_10(works)
+    return works.sample(10)
   end
 
 end
