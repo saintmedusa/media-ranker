@@ -4,7 +4,6 @@ class Work < ApplicationRecord
   validates :category, presence: true, inclusion: {in: @categories}
   validates :creator, presence: true
   validates :published, presence: true
-    #numericality: {only_integer: true, less_than_or_equal_to: Time.now.year}
 
   
   def self.categories
