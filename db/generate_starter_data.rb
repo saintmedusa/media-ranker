@@ -22,3 +22,11 @@ CSV.open("db/works_seeds.csv", "w", :write_headers => true,
     csv << [category, title, creator, publication_year, description]
   end
 end
+
+CSV.open("db/users_seeds.csv", "w", :write_headers => true,
+  :headers => ["username"]) do |csv|
+  25.times do
+    username = Faker::Name.name
+    csv << [username]
+  end
+end
