@@ -14,3 +14,28 @@
 /* Custom bootstrap variables must be set or imported *before* bootstrap. */
 @import "bootstrap";
 @import "**/*";
+
+body {
+  margin: 0;
+  background: #FCF6B1;
+}
+header {
+  background: #A9E5BB;
+  padding: 100px;
+}
+nav {
+  background: #F7B32B;
+  border-top: solid 2px #FCF6B1;
+  color: #2D1E2F;
+  padding: 3px;
+}
+main {
+  margin: 25px auto;
+}
+
+footer {
+  background:#2D1E2F;
+  color:#FCF6B1;
+  border-top: solid 5px #A9E5BB;
+  padding: 50px;
+}
