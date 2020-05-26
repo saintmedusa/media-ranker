@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :require_login, except: [:logout, :current]
   before_action :find_user, only: [:show]
 
   def index
@@ -41,10 +42,6 @@ class UsersController < ApplicationController
 
   def current
     @current_user = User.find_by(id: session[:current_user_id])
-    if @current_user.nil?
-      flash[:error] = "Please login:"
-      redirect_to login_path
-    end
   end
 
   def logout
