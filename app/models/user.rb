@@ -1,4 +1,3 @@
-require_relative 'model_helper_methods'
 class User < ApplicationRecord
   validates :username, presence: true, uniqueness: true
   def joined_date
