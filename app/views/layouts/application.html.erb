@@ -20,6 +20,11 @@
     <div class="nav-option"><%= link_to "All Works", works_path, class: "nav-link"%></div>
     <div class="nav-option"><%= link_to "Add a Work", new_work_path, class: "nav-link"%></div>
     <div class="nav-option"><%= link_to "View Users", users_path, class: "nav-link"%></div>
+    <% if session[:current_user_id] == nil%>
+      <%= button_to "Login", login_path, method: :get %>
+    <% else %>
+      <%= button_to "Logout", logout_path %>
+    <%end%>
     </nav>
     <main>
       <section class="flash-message">
