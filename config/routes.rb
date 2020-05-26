@@ -3,5 +3,9 @@ Rails.application.routes.draw do
   root to: "works#top_10"
   resources :works
   get 'works/top', to: 'works#top_10', as: 'top_works'
-  resources :users, only: [:index, :show, :new, :create]
+  resources :users, only: [:index, :show]
+  get "/login", to: "users#login_form", as: "login"
+  post "/login", to: "users#login"
+  post "/logout", to: "users#logout", as: "logout"
+  get "/users/current", to: "users#current", as: "current_user" 
 end
