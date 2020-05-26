@@ -32,6 +32,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def current
+    @current_user = User.find_by(id: session[:current_user_id])
+    if @current_user.nil?
+      flash[:error] = "Please login:"
+      redirect_to login_path
+    end
+  end
+
 
   private
   def user_params
