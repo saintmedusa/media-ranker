@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'votes/create'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "works#top_10"
   resources :works
@@ -9,4 +10,6 @@ Rails.application.routes.draw do
   post "/logout", to: "users#logout", as: "logout"
   get "/current_user", to: "users#current", as: "current_user" 
   resources :users, only: [:index, :show]
+
+  resources :votes, only:[:create]
 end

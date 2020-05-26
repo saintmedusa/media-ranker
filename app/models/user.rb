@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :votes
+  
   validates :username, presence: true, uniqueness: true
   def joined_date
     return format_datetime(self.created_at)

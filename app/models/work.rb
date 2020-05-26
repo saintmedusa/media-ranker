@@ -1,4 +1,5 @@
 class Work < ApplicationRecord
+  belongs_to :vote
   @categories = ["book", "album", "movie"]
   validates :title, presence: true
   validates :category, presence: true, inclusion: {in: @categories}
