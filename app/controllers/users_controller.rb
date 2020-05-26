@@ -12,12 +12,13 @@ class UsersController < ApplicationController
   end
 
   def login # dry up
-    @user = User.find_by(username: params[:username])
+    username = params[:username]
+    @user = User.find_by(username: username)
     if @user.nil?
-      @user = User.new(user_params)
+      @user = User.new(username: username)
       if @user.save
         session[:current_user_id] = @user.id
-        flash[:success] = "Created new account. Welcome, #{params[:username]}"
+        flash[:success] = "Created new account. Welcome, #{username}"
         redirect_to user_path(@user)
         return
       else 
@@ -42,9 +43,10 @@ class UsersController < ApplicationController
 
 
   private
-  def user_params
-    return params.require(:user).permit(:username)
-  end
+  #  not working for login...
+  # def user_params
+  #   return params.require(:user).permit(:username)
+  # end
 
   def find_user
     @user = User.find_by(id: params[:id])
