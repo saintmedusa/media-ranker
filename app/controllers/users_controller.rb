@@ -12,26 +12,44 @@ class UsersController < ApplicationController
   end
 
   def login # dry up
+    puts params # when I delete this line, this action stops working. IDFK.
     username = params[:username]
-    @user = User.find_by(username: username)
-    if @user.nil?
-      @user = User.new(username: username)
-      if @user.save
-        session[:current_user_id] = @user.id
-        flash[:success] = "Created new account. Welcome, #{username}"
-        redirect_to user_path(@user)
+    user = User.find_by(username: username)
+    if user.nil?
+      user = User.new(username: username)
+      if user.save
+        session[:current_user_id] = user.id
+        flash[:success] = "Created new account. Welcome, #{user.username}"
+        redirect_to current_user_path(user)
         return
       else 
         flash.now[:error] = "User wasn't created, try a different username"
-        render :new, status: :bad_request
+        render :login_form, status: :bad_request
         return
       end
     else
-      session[:current_user_id] = @user.id
-      flash[:success] = "Welcome back, #{@user.username}"
+      session[:current_user_id] = user.id
+      flash[:success] = "Welcome back, #{user.username}"
       redirect_to root_path
+      return
     end
   end
+
+  # def login
+  #   username = params[:user][:username]
+  #   user = User.find_by(username: username)
+  #   if user
+  #     session[:user_id] = user.id
+  #     flash[:success] = "Successfully logged in as returning user #{username}"
+  #   else
+  #     user = User.create(username: username)
+  #     session[:user_id] = user.id
+  #     flash[:success] = "Successfully logged in as new user #{username}"
+  #   end
+  
+  #   redirect_to root_path
+  #   return
+  # end
 
   def current
     @current_user = User.find_by(id: session[:current_user_id])
