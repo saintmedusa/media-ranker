@@ -5,4 +5,5 @@ class Vote < ApplicationRecord
   validates :work_id, presence: true
   validates_associated :user
   validates_associated :work
+  validates_with UniqueUserVote
 end
