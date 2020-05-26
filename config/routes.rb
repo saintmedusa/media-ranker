@@ -11,5 +11,5 @@ Rails.application.routes.draw do
   get "/current_user", to: "users#current", as: "current_user" 
   resources :users, only: [:index, :show]
 
-  resources :votes, only:[:create]
+  post "/votes/create", to: "votes#create", as: "vote_create"
 end

@@ -1,25 +1,20 @@
 class VotesController < ApplicationController
 
   def create
-    @vote = Vote.new(vote_params)
+    user_id = session[:current_user_id]
+    work_id = params[:format]
+    @vote = Vote.new(user_id: user_id, work_id: work_id)
     if @vote.save
-      flash.now[:success] = "Successfully upvoted"
-      head :created
-      return
+      flash[:success] = "Successfully upvoted"
     else
       error = "Upvote failed: "
       if session[:current_user_id] == nil
-        flash.now[:error] = error + "you must login first"
+        flash[:error] = error + "you must login first"
       else
-        flash.now[:error] = error + "already voted on this work"
+        flash[:error] = error + "already voted on this work"
       end
-      head :bad_request
-      return
     end
+    redirect_back(fallback_location: root_path)
   end
 
-  private
-  def vote_params
-    return params.require(:vote).permit(:user_id)#,work_id)
-  end
 end
