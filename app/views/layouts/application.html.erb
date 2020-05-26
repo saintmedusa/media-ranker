@@ -21,7 +21,16 @@
     <div class="nav-option"><%= link_to "Add a Work", new_work_path, class: "nav-link"%></div>
     <div class="nav-option"><%= link_to "View Users", users_path, class: "nav-link"%></div>
     </nav>
-    <main><%= yield %></main>
+    <main>
+      <section class="flash-message">
+        <% flash.each do |name, message|%>
+          <strong class="<%= name %>">
+            <%= message %>
+          </strong>
+        <%end%>
+      </section>
+      <%= yield %>
+    </main>
     <footer>
       <p>Created by: <a href="https://github.com/saintmedusa" class="link">Yaz O'Shaughnessy</a></p>
     </footer>

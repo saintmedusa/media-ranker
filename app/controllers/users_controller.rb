@@ -5,9 +5,7 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
-  def show
-    @user = User.find_by(id: params[:id])
-  end
+  def show; end
 
   def new
     @user = User.new
@@ -16,10 +14,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      flash[:success] = "Welcome, #{@user.username}"
       redirect_to user_path(@user)
       return
     else
-      render :new
+      flash.now[:error] = "User wasn't created, try again"
+      render :new, status: :bad_request
       return
     end
   end
@@ -31,6 +31,10 @@ class UsersController < ApplicationController
 
   def find_user
     @user = User.find_by(id: params[:id])
+    if @user.nil?
+      head :not_found
+      return
+    end
   end
 
 end

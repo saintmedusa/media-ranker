@@ -14,40 +14,34 @@ class WorksController < ApplicationController
   def create
     @work = Work.new(work_params)
     if @work.save
+      flash[:success] = "#{@work.category} successfully added!"
       redirect_to work_path(@work)
       return
     else
-      render :new
+      flash.now[:error] = "Work wasn't created, try again"
+      render :new, status: :bad_request
       return
     end
   end
 
-  def edit
-    if @work.nil?
-      head :not_found
-      return
-    end
-  end
+  def edit; end
 
   def update
-    if @work.nil?
-      head :not_found
-      return
-    elsif @work.update(work_params)
+    if @work.update(work_params)
+      flash[:success] = "Changes successful."
       redirect_to work_path
       return
     else
+      flash.now[:error] = "Edit unsuccessful, try again."
       render :edit
       return
     end
   end
 
   def destroy
-    if @work.nil?
-      head :not_found
-      return
-    end
+    title = @work.title
     @work.destroy
+    flash[:success] = "#{title} deleted."
     redirect_to works_path
     return
   end
@@ -66,5 +60,10 @@ class WorksController < ApplicationController
 
   def find_work
     @work = Work.find_by(id: params[:id])
+    if @work.nil?
+      head :not_found
+      return
+    end
   end
+
 end
