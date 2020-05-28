@@ -41,6 +41,23 @@ class Work < ApplicationRecord
     end
   end
 
+  def self.top_10_hash
+    top_10_hash = {}
+    Work.category_hash.each do |category, works|
+      top_10_hash[category] = Work.top_10(works)
+    end
+  end
+
+  def self.spotlight
+    creme = {}
+    Work.top_10_hash.each do |category, works|
+      creme[category] = works[0]
+    end
+    return creme.values.max {|work1, work2|
+      work1 <=> work2
+    }
+  end
+
   def <=>(other)
     if other.class != Work
       return nil

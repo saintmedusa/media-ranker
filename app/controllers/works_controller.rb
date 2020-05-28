@@ -48,10 +48,11 @@ class WorksController < ApplicationController
   end
 
   def top_10
-    @works = {}
-    Work.category_hash.each do |category, works|
-      @works[category] = Work.top_10(works)
-    end
+    @works = Work.top_10_hash
+  end
+
+  def spotlight
+    @work = Work.spotlight
   end
 
   private
